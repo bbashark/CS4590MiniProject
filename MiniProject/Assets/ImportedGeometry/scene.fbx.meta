@@ -1,0 +1,146 @@
+fileFormatVersion: 2
+guid: 503d34447556a544d8364c8d7c0ebc41
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: green_int1:chair1
+    100002: green_int1:chair2
+    100004: green_int1:chair3
+    100006: green_int1:chair4
+    100008: green_int1:group1
+    100010: green_int1:mir1
+    100012: green_int1:mir2
+    100014: green_int1:mirror1
+    100016: green_int1:mirror_part
+    100018: green_int1:pCube11
+    100020: green_int1:pCube12
+    100022: green_int1:pCube13
+    100024: green_int1:pCube14
+    100026: green_int1:pointLight1
+    100028: green_int1:Table
+    100030: green_int1:table_support
+    100032: green_int1:upper_wall_plane
+    100034: green_int1:Walls
+    100036: //RootNode
+    400000: green_int1:chair1
+    400002: green_int1:chair2
+    400004: green_int1:chair3
+    400006: green_int1:chair4
+    400008: green_int1:group1
+    400010: green_int1:mir1
+    400012: green_int1:mir2
+    400014: green_int1:mirror1
+    400016: green_int1:mirror_part
+    400018: green_int1:pCube11
+    400020: green_int1:pCube12
+    400022: green_int1:pCube13
+    400024: green_int1:pCube14
+    400026: green_int1:pointLight1
+    400028: green_int1:Table
+    400030: green_int1:table_support
+    400032: green_int1:upper_wall_plane
+    400034: green_int1:Walls
+    400036: //RootNode
+    2300000: green_int1:chair1
+    2300002: green_int1:chair2
+    2300004: green_int1:chair3
+    2300006: green_int1:chair4
+    2300008: green_int1:mir1
+    2300010: green_int1:mir2
+    2300012: green_int1:mirror1
+    2300014: green_int1:mirror_part
+    2300016: green_int1:pCube11
+    2300018: green_int1:pCube12
+    2300020: green_int1:pCube13
+    2300022: green_int1:pCube14
+    2300024: green_int1:Table
+    2300026: green_int1:table_support
+    2300028: green_int1:upper_wall_plane
+    2300030: green_int1:Walls
+    3300000: green_int1:chair1
+    3300002: green_int1:chair2
+    3300004: green_int1:chair3
+    3300006: green_int1:chair4
+    3300008: green_int1:mir1
+    3300010: green_int1:mir2
+    3300012: green_int1:mirror1
+    3300014: green_int1:mirror_part
+    3300016: green_int1:pCube11
+    3300018: green_int1:pCube12
+    3300020: green_int1:pCube13
+    3300022: green_int1:pCube14
+    3300024: green_int1:Table
+    3300026: green_int1:table_support
+    3300028: green_int1:upper_wall_plane
+    3300030: green_int1:Walls
+    4300000: green_int1:mir2
+    4300002: green_int1:mir1
+    4300004: green_int1:mirror1
+    4300006: green_int1:chair1
+    4300008: green_int1:chair2
+    4300010: green_int1:chair3
+    4300012: green_int1:Table
+    4300014: green_int1:table_support
+    4300016: green_int1:Walls
+    4300018: green_int1:chair4
+    4300020: green_int1:pCube11
+    4300022: green_int1:pCube12
+    4300024: green_int1:pCube13
+    4300026: green_int1:pCube14
+    4300028: green_int1:mirror_part
+    4300030: green_int1:upper_wall_plane
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
