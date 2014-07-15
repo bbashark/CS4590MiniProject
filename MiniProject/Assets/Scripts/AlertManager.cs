@@ -1,41 +1,58 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public static class AlertManager : MonoBehaviour {
+public class AlertManager: MonoBehaviour {
 
 	public Alert[] alerts;
-	private Alert[] randomAlerts;
+	private ArrayList randomAlerts = new ArrayList();
+	public float minAlertTime, maxAlertTime;
 	private bool pickRandomAlert;
+	private bool setOffRandomAlert = false;
+	private bool newAlert = true;
+	private int randomAlertID;
+	private float randomAlertTime, randomAlertStart;
 
-
-	// Use this for initialization
-	void Start () {
-		//cycle through alerts, if alert isn't intended to be triggered at a particular time,
-		//add it to random alerts
-		//.RandomAlert();
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+	void Start(){
+		foreach(Alert i in alerts){
+			if(i.randomAlert){
+				randomAlerts.Add(i);
+			}
+		}
 	}
 
-	public void CallAlert(Alert alertToCall){
+	void Update(){
+		if(setOffRandomAlert) {
+			if(newAlert){
+				SetupRandomAlert();
+			}
+			if(Time.time - randomAlertStart == randomAlertTime) {
+				CallAlert ((Alert)randomAlerts[randomAlertID]);
+			}
+		}
+	}
+
+	void SetupRandomAlert(){
+		randomAlertID = Random.Range (0, randomAlerts.Count);
+		randomAlertTime = Random.Range (minAlertTime, maxAlertTime);
+		newAlert = false;
+		randomAlertStart = Time.time;
+	}
+
+	public static void CallAlert(Alert alertToCall){
 		AddAlertVisual ();
 		alertToCall.ActivateAlert ();
 	}
 
-	public void ClearAlert(Alert alertToClear){
-		alertToCall.ResolveAlert ();
+	public static void ClearAlert(Alert alertToClear){
+		alertToClear.ResolveAlert ();
 		RemoveAlertVisual ();
 	}
 
-	public void RemoveAlertVisual(){
+	public static void RemoveAlertVisual(){
 
 	}
 
-	public void AddAlertVisual(){
+	public static void AddAlertVisual(){
 
 	}
 	

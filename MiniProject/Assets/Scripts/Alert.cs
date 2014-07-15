@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Alert: MonoBehaviour {
 
-	public bool randomAlert;
+	public bool randomAlert = true;
 
 	public void ActivateAlert(){
 
