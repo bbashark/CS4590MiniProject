@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Alert: MonoBehaviour {
+public abstract class Alert: MonoBehaviour {
 
 	public bool randomAlert = true;
 
