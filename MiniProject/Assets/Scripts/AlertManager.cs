@@ -20,12 +20,14 @@ public class AlertManager: MonoBehaviour {
 	//---------------------------------------------------------
 	//---------------------------------------------------------
 	public static void CallAlert(Alert alertToCall){
+		Debug.Log ("starting an alert");
 		AddAlertVisual (alertToCall);
 		alertToCall.ActivateAlert ();
 		currentActiveAlerts.Add (alertToCall);
 	}
 	
 	public static void ClearAlert(Alert alertToClear){
+		Debug.Log ("clearing alert");
 		alertToClear.ResolveAlert ();
 		RemoveAlertVisual (alertToClear);
 		currentActiveAlerts.Remove (alertToClear);
@@ -37,15 +39,14 @@ public class AlertManager: MonoBehaviour {
 	//---------------------------------------------------------
 	//---------------------------------------------------------
 	void Start(){
-		//these are overriden if values are set in editor
-		minAlertTime = 3.0f;
-		maxAlertTime = 12.0f;
-
 		foreach(Alert i in alerts){
 			if(i.randomAlert){
 				randomAlerts.Add(i);
 			}
 		}
+
+		//temp test code
+		CallAlert ((Alert)alerts [0]);
 	}
 
 	void Update(){

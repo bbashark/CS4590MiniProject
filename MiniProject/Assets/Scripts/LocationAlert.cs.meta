@@ -2,7 +2,11 @@ fileFormatVersion: 2
 guid: 89aab457737c43646983c1464dc7487a
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - activateClip: {fileID: 8300000, guid: d1c9112f60aa0d647b5a6116d5c1ab19, type: 3}
+  - resolveClip: {fileID: 8300000, guid: 5d0a234e2d9de6246a1f85b7692a8146, type: 3}
+  - locationFindingClip: {fileID: 8300000, guid: d98bf12398ab8a441857e0fa20df162b,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

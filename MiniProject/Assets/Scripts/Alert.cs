@@ -7,19 +7,14 @@ public abstract class Alert: MonoBehaviour {
 	public AudioClip activateClip, resolveClip;
 	private bool destroyObject = false;
 	
-	public void ActivateAlert(){
+	public virtual void ActivateAlert(){
 		audio.PlayOneShot (activateClip);
+		Debug.Log ("play one shot");
 	}
 
-	public void ResolveAlert(){
+	public virtual void ResolveAlert(){
 		audio.PlayOneShot (resolveClip);
-		destroyObject = true;
-	}
-
-	void Update() {
-		if (destroyObject && !audio.isPlaying){
-			GameObject.Destroy(this);
-		}
+		Debug.Log ("alert resolved");
 	}
 
 }

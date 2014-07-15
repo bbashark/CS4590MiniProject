@@ -47,4 +47,11 @@ public class FPSInputController : MonoBehaviour
         motor.inputMoveDirection = transform.rotation * directionVector;
         motor.inputJump = Input.GetButton("Jump");
     }
+
+	void OnTriggerEnter(Collider collision){
+		Debug.Log ("entered desired positoin");
+		if(collision.transform.parent.GetComponent<Alert>() != null) {
+			collision.transform.parent.GetComponent<Alert>().ResolveAlert();
+		}
+	}
 }
