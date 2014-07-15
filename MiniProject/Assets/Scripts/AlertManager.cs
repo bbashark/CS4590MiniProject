@@ -5,6 +5,7 @@ public class AlertManager: MonoBehaviour {
 
 	public Alert[] alerts;
 	private ArrayList randomAlerts = new ArrayList();
+	private static ArrayList currentActiveAlerts = new ArrayList();
 	public float minAlertTime, maxAlertTime;
 	private bool pickRandomAlert;
 	private bool setOffRandomAlert = true;
@@ -21,11 +22,13 @@ public class AlertManager: MonoBehaviour {
 	public static void CallAlert(Alert alertToCall){
 		AddAlertVisual (alertToCall);
 		alertToCall.ActivateAlert ();
+		currentActiveAlerts.Add (alertToCall);
 	}
 	
 	public static void ClearAlert(Alert alertToClear){
 		alertToClear.ResolveAlert ();
 		RemoveAlertVisual (alertToClear);
+		currentActiveAlerts.Remove (alertToClear);
 	}
 
 	//---------------------------------------------------------
