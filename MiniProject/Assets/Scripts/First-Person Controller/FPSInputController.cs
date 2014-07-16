@@ -11,6 +11,7 @@ using System.Collections.Generic;
 
 public class FPSInputController : MonoBehaviour
 {
+	private bool parented = false;
     private CharacterMotor motor;
 
     // Use this for initialization
@@ -48,10 +49,22 @@ public class FPSInputController : MonoBehaviour
         motor.inputJump = Input.GetButton("Jump");
     }
 
-	void OnTriggerEnter(Collider collision){
-		Debug.Log ("entered desired positoin");
-		if(collision.transform.parent.GetComponent<Alert>() != null) {
-			collision.transform.parent.GetComponent<Alert>().ResolveAlert();
+	void OnCollisionEnter(Collision collision){
+
+	}
+
+	void OnTriggerStay(Collider collider){
+		if(collider.gameObject.tag.Equals("Grabbable")) {
+			if(Input.GetKeyDown("q")) {
+				Debug.Log("grabbed camera");
+				if(parented) {
+					collider.transform.parent = transform.parent.parent;
+					parented = false;
+				} else {
+					collider.transform.parent = transform;
+					parented = true;
+				}
+			}
 		}
 	}
 }
