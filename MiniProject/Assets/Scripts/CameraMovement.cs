@@ -9,4 +9,8 @@ public class CameraMovement : MonoBehaviour {
 			collision.transform.parent.GetComponent<Alert>().ResolveAlert();
 		}
 	}
+
+	void OnCollisionEnter(Collision collision){
+		Debug.Log ("character controller collided with me");
+	}
 }
