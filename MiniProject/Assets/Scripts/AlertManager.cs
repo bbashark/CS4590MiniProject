@@ -46,7 +46,7 @@ public class AlertManager: MonoBehaviour {
 		}
 
 		//temp test code
-		CallAlert ((Alert)alerts [0]);
+		//CallAlert ((Alert)alerts [0]);
 	}
 
 	void Update(){
