@@ -49,9 +49,10 @@ public class FPSInputController : MonoBehaviour
         motor.inputJump = Input.GetButton("Jump");
     }
 
-	void OnTriggerEnter(Collider collider){
-		Debug.Log ("can do collisions this way");
+	void OnControllerColliderHit(ControllerColliderHit collider){
+		Debug.Log ("controller collider hit" + collider.gameObject.name);
 	}
+
 	void OnTriggerStay(Collider collider){
 		if(collider.gameObject.tag.Equals("Grabbable")) {
 			if(Input.GetKeyDown("q")) {
