@@ -25,14 +25,15 @@ public class onCollision : MonoBehaviour {
 	}
 	
 	void OnCollisionEnter (Collision collision) {
-		if (timer == 0) {
-			audio.PlayOneShot (sounds [Random.Range (0, sounds.Length)]);
-			timer = cool;
-		}
+		Play ();
 	}
 
 	void OnControllerColliderHit(ControllerColliderHit hit) {
-		if (timer == 0 && !audio.isPlaying) {
+		Play ();
+	}
+
+	public void Play() {
+		if (timer == 0) {
 			audio.PlayOneShot (sounds [Random.Range (0, sounds.Length)]);
 			timer = cool;
 		}

@@ -12,7 +12,7 @@ public class AlertManager: MonoBehaviour {
 	private bool newAlert = true;
 	private int randomAlertID;
 	private float randomAlertTime, randomAlertStart, randomAnnoyanceLevel, annoyanceTimeElapse;
-	private int minAnnoyance, maxAnnoyance;
+	private float minAnnoyance, maxAnnoyance; // ADD superior/inferior bool
 	public AnimationCurve annoyanceCurve;
 
 	public ReceiveNotice sendNotice;
@@ -71,8 +71,8 @@ public class AlertManager: MonoBehaviour {
 	void SetupRandomAlert(){
 		//min and max annoyance move across animation curve
 		annoyanceTimeElapse += 0.1f;
-		minAnnoyance = (annoyanceTimeElapse - 0.1f) * 10;
-		maxAnnoyance = annoyanceTimeElapse * 10;
+		minAnnoyance = (float)((annoyanceTimeElapse - 0.1f) * 10.0f);
+		maxAnnoyance = (float)(annoyanceTimeElapse * 10.0f);
 
 		randomAlertID = Random.Range (0, randomAlerts.Count);
 		randomAlertTime = Random.Range (minAlertTime, maxAlertTime);

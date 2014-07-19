@@ -63,4 +63,10 @@ public class CharacterSounds : MonoBehaviour {
 		audio.PlayOneShot(land, volumeScale);
 		
 	}
+
+	void OnControllerColliderHit(ControllerColliderHit hit) {
+		if(hit.gameObject.GetComponent<onCollision>() ) {
+			hit.gameObject.GetComponent<onCollision>().Play ();
+		}
+	}
 }

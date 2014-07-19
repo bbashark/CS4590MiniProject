@@ -11,6 +11,6 @@ public class CameraMovement : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision collision){
-		Debug.Log ("character controller collided with me");
+		//Debug.Log ("character controller collided with me");
 	}
 }
