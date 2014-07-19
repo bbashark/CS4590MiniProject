@@ -50,7 +50,7 @@ public class FPSInputController : MonoBehaviour
     }
 
 	void OnControllerColliderHit(ControllerColliderHit collider){
-		Debug.Log ("controller collider hit" + collider.gameObject.name);
+		//Debug.Log ("controller collider hit" + collider.gameObject.name);
 	}
 
 	void OnTriggerStay(Collider collider){
