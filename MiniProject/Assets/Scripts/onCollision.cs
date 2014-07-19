@@ -31,7 +31,7 @@ public class onCollision : MonoBehaviour {
 		}
 	}
 
-	void OnCharacterCollision(Vector3 velocity) {
+	void OnControllerColliderHit(ControllerColliderHit hit) {
 		if (timer == 0 && !audio.isPlaying) {
 			audio.PlayOneShot (sounds [Random.Range (0, sounds.Length)]);
 			timer = cool;
