@@ -11,7 +11,9 @@ public class AlertManager: MonoBehaviour {
 	private bool setOffRandomAlert = true;
 	private bool newAlert = true;
 	private int randomAlertID;
-	private float randomAlertTime, randomAlertStart;
+	private float randomAlertTime, randomAlertStart, randomAnnoyanceLevel, annoyanceTimeElapse;
+	private int minAnnoyance, maxAnnoyance;
+	public AnimationCurve annoyanceCurve;
 
 	public ReceiveNotice sendNotice;
 
@@ -41,6 +43,7 @@ public class AlertManager: MonoBehaviour {
 	//---------------------------------------------------------
 	//---------------------------------------------------------
 	void Start(){
+		annoyanceTimeElapse = 0.0f;
 		foreach(Alert i in alerts){
 			if(i.randomAlert){
 				randomAlerts.Add(i);
@@ -58,19 +61,30 @@ public class AlertManager: MonoBehaviour {
 			}
 			if(Time.time - randomAlertStart > randomAlertTime) {
 				//CallAlert ((Alert)randomAlerts[randomAlertID]);
-				Debug.Log("notice");
-				sendNotice.play = true;
+				Debug.Log("notice with annoyance level " + randomAnnoyanceLevel);
+				sendNotice.play = true; 
 				newAlert = true;
 			}
 		}
 	}
 
 	void SetupRandomAlert(){
+		//min and max annoyance move across animation curve
+		annoyanceTimeElapse += 0.1f;
+		minAnnoyance = (annoyanceTimeElapse - 0.1f) * 10;
+		maxAnnoyance = annoyanceTimeElapse * 10;
+
 		randomAlertID = Random.Range (0, randomAlerts.Count);
 		randomAlertTime = Random.Range (minAlertTime, maxAlertTime);
+		randomAnnoyanceLevel = Random.Range (minAnnoyance, maxAnnoyance);
 		newAlert = false;
 		randomAlertStart = Time.time;
 		Debug.Log ("new alert in " + randomAlertTime);
+
+		//when at the end of the curve, queue the quiet on set script
+		if (annoyanceTimeElapse > 1f) {
+			setOffRandomAlert = false;
+		}
 	}
 
 
