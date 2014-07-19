@@ -37,6 +37,9 @@ public class QuietOnSet : MonoBehaviour {
 	}
 
 	IEnumerator FadeAudio(GameObject i){
+		audio.volume = 0.8f;
+		audio.pitch = 0.3f;
+		//audio.PlayOneShot ();
 		if(i.audio.volume > 0) {
 			i.audio.volume -= 0.1f;
 			yield return new WaitForSeconds(0.1f);
