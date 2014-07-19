@@ -3,10 +3,12 @@ using System.Collections;
 
 public class QuietOnSet : MonoBehaviour {
 	public bool activate;
-	private ArrayList objectsWithSound = new ArrayList();
+	private AudioSource[] objectsWithSound;
 	private bool rec = false;
 	public float pauseTime;
 	private float startTime;
+	public AudioClip superiorSound;
+	private bool firstRun = true;
 
 	// Use this for initialization
 	void Start () {
@@ -16,12 +18,17 @@ public class QuietOnSet : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(activate){
-			objectsWithSound.Add( GameObject.FindWithTag("PlaysAudio") );
+			if(firstRun) {
+				objectsWithSound = GameObject.FindObjectsOfType(typeof(AudioSource)) as AudioSource[];//.FindGameObjectsWithTag("PlaysAudio");
+				firstRun = false;
+				audio.volume = 0.8f;
+				audio.PlayOneShot (superiorSound);
+			}
 
-			foreach(GameObject i in objectsWithSound) {
+			foreach(AudioSource i in objectsWithSound) {
 				StartCoroutine(FadeAudio(i));
 			}
-			activate = false;
+			//activate = false;
 			rec = true;
 			startTime = Time.time;
 		}
@@ -36,10 +43,8 @@ public class QuietOnSet : MonoBehaviour {
 	
 	}
 
-	IEnumerator FadeAudio(GameObject i){
-		audio.volume = 0.8f;
-		audio.pitch = 0.3f;
-		//audio.PlayOneShot ();
+	IEnumerator FadeAudio(AudioSource i){
+		yield return new WaitForSeconds (superiorSound.length);
 		if(i.audio.volume > 0) {
 			i.audio.volume -= 0.1f;
 			yield return new WaitForSeconds(0.1f);
