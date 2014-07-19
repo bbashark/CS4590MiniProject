@@ -12,10 +12,12 @@ public class AlertManager: MonoBehaviour {
 	private bool newAlert = true;
 	private int randomAlertID;
 	private float randomAlertTime, randomAlertStart, randomAnnoyanceLevel, annoyanceTimeElapse;
-	private float minAnnoyance, maxAnnoyance; // ADD superior/inferior bool
+	private float minAnnoyance, maxAnnoyance;
+	private int superiorLevel;
 	public AnimationCurve annoyanceCurve;
 
 	public ReceiveNotice sendNotice;
+	public QuietOnSet queueRecording;
 
 	
 	//---------------------------------------------------------
@@ -43,7 +45,7 @@ public class AlertManager: MonoBehaviour {
 	//---------------------------------------------------------
 	//---------------------------------------------------------
 	void Start(){
-		annoyanceTimeElapse = 0.0f;
+		annoyanceTimeElapse = 0.8f;
 		foreach(Alert i in alerts){
 			if(i.randomAlert){
 				randomAlerts.Add(i);
@@ -83,7 +85,9 @@ public class AlertManager: MonoBehaviour {
 
 		//when at the end of the curve, queue the quiet on set script
 		if (annoyanceTimeElapse > 1f) {
+			Debug.Log("quiet on set running");
 			setOffRandomAlert = false;
+			queueRecording.activate = true;
 		}
 	}
 
