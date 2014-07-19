@@ -13,6 +13,8 @@ public class AlertManager: MonoBehaviour {
 	private int randomAlertID;
 	private float randomAlertTime, randomAlertStart;
 
+	public ReceiveNotice sendNotice;
+
 	
 	//---------------------------------------------------------
 	//---------------------------------------------------------
@@ -54,8 +56,10 @@ public class AlertManager: MonoBehaviour {
 			if(newAlert){
 				SetupRandomAlert();
 			}
-			if(Time.time - randomAlertStart == randomAlertTime) {
-				CallAlert ((Alert)randomAlerts[randomAlertID]);
+			if(Time.time - randomAlertStart > randomAlertTime) {
+				//CallAlert ((Alert)randomAlerts[randomAlertID]);
+				Debug.Log("notice");
+				sendNotice.play = true;
 				newAlert = true;
 			}
 		}
@@ -66,6 +70,7 @@ public class AlertManager: MonoBehaviour {
 		randomAlertTime = Random.Range (minAlertTime, maxAlertTime);
 		newAlert = false;
 		randomAlertStart = Time.time;
+		Debug.Log ("new alert in " + randomAlertTime);
 	}
 
 
