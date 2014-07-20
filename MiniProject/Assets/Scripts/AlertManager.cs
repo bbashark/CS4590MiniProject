@@ -125,5 +125,7 @@ public class AlertManager: MonoBehaviour {
 		}
 	}
 
-
+	public float getAnnoyanceLevel() {
+		return randomAnnoyanceLevel;
+	}
 }
