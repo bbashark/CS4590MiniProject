@@ -103,14 +103,22 @@ public class AlertManager: MonoBehaviour {
 		maxAnnoyance = annoyanceCurve.Evaluate(annoyanceTimeElapse);
 
 		superiorOrSubordinate = Random.Range (0, 1);
-		superiorLevel = Random.Range (0, 3f);
+		superiorLevel = Random.Range (0f, 3f);
 		randomAlertID = Random.Range (0, randomAlerts.Count);
 		randomAnnoyanceLevel = Random.Range (minAnnoyance, maxAnnoyance);
 		float annoyanceMod = Mathf.Abs(0.9f-randomAnnoyanceLevel);
 		randomAlertTime = Random.Range (minAlertTime*annoyanceMod, maxAlertTime*annoyanceMod);
-		//REPLACE THIS conidional to just add the length of the alert and message being played
-		if (randomAlertTime < 2.0f)
-						randomAlertTime += 1.5f;
+		//set annoyance level to determine audio clip
+		if (randomAnnoyanceLevel < 0.2f){
+			sendNotice.annoyanceLevel = 0;
+		} else if (randomAnnoyanceLevel < 0.6) {
+			sendNotice.annoyanceLevel = 1;
+		} else {
+			sendNotice.annoyanceLevel = 2;
+		}
+		//add length of alert + voice clips to the time when the next random alert will go off
+		randomAlertTime += sendNotice.superiorSound.length + sendNotice.annoyanceClips [sendNotice.annoyanceLevel].length;
+
 		//Debug.Log ("random time chosen: " + randomAlertTime);
 		newAlert = false;
 		randomAlertStart = Time.time;
@@ -128,4 +136,5 @@ public class AlertManager: MonoBehaviour {
 	public float getAnnoyanceLevel() {
 		return randomAnnoyanceLevel;
 	}
+
 }

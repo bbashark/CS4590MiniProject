@@ -5,7 +5,9 @@ public class ReceiveNotice : MonoBehaviour {
 
 	public AudioClip superiorSound;
 	public AudioClip subordinateSound;
+	public AudioClip[] annoyanceClips;
 	public bool play = false;
+	public int annoyanceLevel = 0;
 	public bool superior = true;
 	public float rankMod = 1;
 
@@ -24,12 +26,26 @@ public class ReceiveNotice : MonoBehaviour {
 
 	private void playSound() {
 		audio.pitch = rankMod;
+		Debug.Log (audio.pitch);
 		if (superior) {
-			audio.PlayOneShot(superiorSound);
+			StartCoroutine(AlertPlay(superiorSound));
 		}
 		else{
-			audio.PlayOneShot(subordinateSound);
+			StartCoroutine(AlertPlay(subordinateSound));
 		}
+		//audio.pitch = 1;
+	}
+
+	IEnumerator AlertPlay(AudioClip alert) {
+		audio.PlayOneShot (alert);
+		yield return new WaitForSeconds (alert.length);
+		if (annoyanceLevel > annoyanceClips.Length) {
+						annoyanceLevel = annoyanceClips.Length;
+		}
+		audio.clip = annoyanceClips [annoyanceLevel];
 		audio.pitch = 1;
+		audio.volume = 1;
+		audio.Play ();
+		yield return new WaitForSeconds( annoyanceClips[annoyanceLevel].length );
 	}
 }
