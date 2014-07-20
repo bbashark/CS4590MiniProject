@@ -13,11 +13,18 @@ public class AlertManager: MonoBehaviour {
 	private int randomAlertID;
 	private float randomAlertTime, randomAlertStart, randomAnnoyanceLevel, annoyanceTimeElapse;
 	private float minAnnoyance, maxAnnoyance;
-	private int superiorLevel;
+	private float superiorLevel;
+	private int superiorOrSubordinate; 
 	public AnimationCurve annoyanceCurve;
+	public float annoyanceTotal = 0.0f;
+	public float annoyanceOverTime = 0.0f; 
+	private float lastCurveIncrement, betweenCurveIncrement;
+	private bool incrementedAlert = false;
 
 	public ReceiveNotice sendNotice;
 	public QuietOnSet queueRecording;
+
+
 
 	
 	//---------------------------------------------------------
@@ -27,7 +34,6 @@ public class AlertManager: MonoBehaviour {
 	//---------------------------------------------------------
 	public static void CallAlert(Alert alertToCall){
 		Debug.Log ("starting an alert");
-		AddAlertVisual (alertToCall);
 		alertToCall.ActivateAlert ();
 		currentActiveAlerts.Add (alertToCall);
 	}
@@ -35,7 +41,6 @@ public class AlertManager: MonoBehaviour {
 	public static void ClearAlert(Alert alertToClear){
 		Debug.Log ("clearing alert");
 		alertToClear.ResolveAlert ();
-		RemoveAlertVisual (alertToClear);
 		currentActiveAlerts.Remove (alertToClear);
 	}
 
@@ -45,7 +50,9 @@ public class AlertManager: MonoBehaviour {
 	//---------------------------------------------------------
 	//---------------------------------------------------------
 	void Start(){
-		annoyanceTimeElapse = 0.8f;
+		lastCurveIncrement = Time.time;
+		betweenCurveIncrement = 10.0f;
+		annoyanceTimeElapse = 0.0f;
 		foreach(Alert i in alerts){
 			if(i.randomAlert){
 				randomAlerts.Add(i);
@@ -57,55 +64,67 @@ public class AlertManager: MonoBehaviour {
 	}
 
 	void Update(){
+		annoyanceOverTime = annoyanceTotal / Time.time;
+		//Debug.Log (annoyanceOverTime);
 		if(setOffRandomAlert) {
 			if(newAlert){
+				incrementedAlert = true;
 				SetupRandomAlert();
 			}
 			if(Time.time - randomAlertStart > randomAlertTime) {
-				//CallAlert ((Alert)randomAlerts[randomAlertID]);
-				Debug.Log("notice with annoyance level " + randomAnnoyanceLevel);
+				//Debug.Log("notice with annoyance level " + randomAnnoyanceLevel);
+
+				// we're playing a different alert based on if it's coming from
+				// a superior or subordinate sender, as well as shifting pitch 
+				// based on their specific ranking in those categories
+				if(superiorOrSubordinate == 0 ) {
+					sendNotice.superior = true;
+				} else {
+					sendNotice.superior = false;
+				}
+				sendNotice.rankMod = superiorLevel;
 				sendNotice.play = true; 
 				newAlert = true;
+				//Debug.Log("alert");
+			}
+
+			if(Time.time - lastCurveIncrement > betweenCurveIncrement && incrementedAlert){
+				Debug.Log("incrementing curve pos to " + annoyanceTimeElapse);
+				annoyanceTimeElapse += 0.1f;
+				lastCurveIncrement = Time.time;
+				incrementedAlert = false;
 			}
 		}
 	}
 
 	void SetupRandomAlert(){
 		//min and max annoyance move across animation curve
-		annoyanceTimeElapse += 0.1f;
-		minAnnoyance = (float)((annoyanceTimeElapse - 0.1f) * 10.0f);
-		maxAnnoyance = (float)(annoyanceTimeElapse * 10.0f);
 
+		minAnnoyance = (annoyanceCurve.Evaluate(annoyanceTimeElapse - 0.1f));
+		maxAnnoyance = annoyanceCurve.Evaluate(annoyanceTimeElapse);
+
+		superiorOrSubordinate = Random.Range (0, 1);
+		superiorLevel = Random.Range (0, 3f);
 		randomAlertID = Random.Range (0, randomAlerts.Count);
-		randomAlertTime = Random.Range (minAlertTime, maxAlertTime);
 		randomAnnoyanceLevel = Random.Range (minAnnoyance, maxAnnoyance);
+		float annoyanceMod = Mathf.Abs(0.9f-randomAnnoyanceLevel);
+		randomAlertTime = Random.Range (minAlertTime*annoyanceMod, maxAlertTime*annoyanceMod);
+		//REPLACE THIS conidional to just add the length of the alert and message being played
+		if (randomAlertTime < 2.0f)
+						randomAlertTime += 1.5f;
+		Debug.Log ("random time chosen: " + randomAlertTime);
 		newAlert = false;
 		randomAlertStart = Time.time;
-		Debug.Log ("new alert in " + randomAlertTime);
+		annoyanceTotal += randomAnnoyanceLevel;
+		//Debug.Log ("new alert in " + randomAlertTime);
 
 		//when at the end of the curve, queue the quiet on set script
 		if (annoyanceTimeElapse > 1f) {
-			Debug.Log("quiet on set running");
+			Debug.LogWarning("quiet on set running");
 			setOffRandomAlert = false;
 			queueRecording.activate = true;
 		}
 	}
 
-
-	//---------------------------------------------------------
-	//---------------------------------------------------------
-	//	PLACEHOLDERS:
-	//---------------------------------------------------------
-	//---------------------------------------------------------
-	
-	static void RemoveAlertVisual(Alert alert){
-		//remove color visual
-		Debug.Log ("Alert successfully removed");
-	}
-	
-	static void AddAlertVisual(Alert alert){
-		//color visuals
-		Debug.Log ("Alert successfully added");
-	}
 
 }
