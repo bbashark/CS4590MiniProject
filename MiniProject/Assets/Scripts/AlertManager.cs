@@ -3,6 +3,8 @@ using System.Collections;
 
 public class AlertManager: MonoBehaviour {
 
+	//BRIAN, use randomAnnoyanceLevel for the values you need
+
 	public Alert[] alerts;
 	private ArrayList randomAlerts = new ArrayList();
 	private static ArrayList currentActiveAlerts = new ArrayList();
@@ -11,13 +13,12 @@ public class AlertManager: MonoBehaviour {
 	private bool setOffRandomAlert = true;
 	private bool newAlert = true;
 	private int randomAlertID;
-	private float randomAlertTime, randomAlertStart, randomAnnoyanceLevel, annoyanceTimeElapse;
+	private float randomAlertTime, randomAlertStart, annoyanceTimeElapse;
+	public float randomAnnoyanceLevel;
 	private float minAnnoyance, maxAnnoyance;
 	private float superiorLevel;
 	private int superiorOrSubordinate; 
 	public AnimationCurve annoyanceCurve;
-	public float annoyanceTotal = 0.0f;
-	public float annoyanceOverTime = 0.0f; 
 	private float lastCurveIncrement, betweenCurveIncrement;
 	private bool incrementedAlert = false;
 
@@ -33,13 +34,13 @@ public class AlertManager: MonoBehaviour {
 	//---------------------------------------------------------
 	//---------------------------------------------------------
 	public static void CallAlert(Alert alertToCall){
-		Debug.Log ("starting an alert");
+		//Debug.Log ("starting an alert");
 		alertToCall.ActivateAlert ();
 		currentActiveAlerts.Add (alertToCall);
 	}
 	
 	public static void ClearAlert(Alert alertToClear){
-		Debug.Log ("clearing alert");
+		//Debug.Log ("clearing alert");
 		alertToClear.ResolveAlert ();
 		currentActiveAlerts.Remove (alertToClear);
 	}
@@ -64,8 +65,6 @@ public class AlertManager: MonoBehaviour {
 	}
 
 	void Update(){
-		annoyanceOverTime = annoyanceTotal / Time.time;
-		//Debug.Log (annoyanceOverTime);
 		if(setOffRandomAlert) {
 			if(newAlert){
 				incrementedAlert = true;
@@ -89,7 +88,7 @@ public class AlertManager: MonoBehaviour {
 			}
 
 			if(Time.time - lastCurveIncrement > betweenCurveIncrement && incrementedAlert){
-				Debug.Log("incrementing curve pos to " + annoyanceTimeElapse);
+				//Debug.Log("incrementing curve pos to " + annoyanceTimeElapse);
 				annoyanceTimeElapse += 0.1f;
 				lastCurveIncrement = Time.time;
 				incrementedAlert = false;
@@ -112,15 +111,15 @@ public class AlertManager: MonoBehaviour {
 		//REPLACE THIS conidional to just add the length of the alert and message being played
 		if (randomAlertTime < 2.0f)
 						randomAlertTime += 1.5f;
-		Debug.Log ("random time chosen: " + randomAlertTime);
+		//Debug.Log ("random time chosen: " + randomAlertTime);
 		newAlert = false;
 		randomAlertStart = Time.time;
-		annoyanceTotal += randomAnnoyanceLevel;
+		//Debug.Log (randomAnnoyanceLevel);
 		//Debug.Log ("new alert in " + randomAlertTime);
 
 		//when at the end of the curve, queue the quiet on set script
 		if (annoyanceTimeElapse > 1f) {
-			Debug.LogWarning("quiet on set running");
+			//Debug.LogWarning("quiet on set running");
 			setOffRandomAlert = false;
 			queueRecording.activate = true;
 		}
