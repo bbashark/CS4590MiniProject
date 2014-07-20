@@ -6,16 +6,12 @@ public class AmbientChannel : MonoBehaviour {
 	public AudioClip ambientSound;
 	public AlertManager alertManagerObject;
 	public float annoyanceToPitchMultiple;
-	private float testPitch;
 
 	// Use this for initialization
 	void Start () {
 		audio.clip = ambientSound;
 		audio.loop = true;
 		audio.Play();
-
-		// test vars
-		testPitch = 1.0f;
 	}
 	
 	// Update is called once per frame
@@ -25,12 +21,10 @@ public class AmbientChannel : MonoBehaviour {
 		// calculate new pitch
 		float pitch = 1.0f + stress * annoyanceToPitchMultiple;
 		// don't let pitch get too crazy.
-		if (pitch > 5.0f) {
-			pitch = 5.0f;
+		if (pitch > 10.0f) {
+			pitch = 10.0f;
 		}
 
 		audio.pitch = pitch;
-		//testPitch += Time.deltaTime;
-		//audio.pitch = testPitch;
 	}
 }
