@@ -122,7 +122,8 @@ public class AlertManager: MonoBehaviour {
 			sendNotice.annoyanceLevel = 2;
 		}
 		//add length of alert + voice clips to the time when the next random alert will go off
-		randomAlertTime += sendNotice.superiorSound.length + sendNotice.annoyanceClips [sendNotice.annoyanceLevel].length;
+//		randomAlertTime += sendNotice.superiorSound.length + sendNotice.annoyanceClips [sendNotice.annoyanceLevel].length;
+		randomAlertTime += sendNotice.superiorSound.length + 5F;
 
 		//Debug.Log ("random time chosen: " + randomAlertTime);
 		newAlert = false;
