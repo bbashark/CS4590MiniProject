@@ -10,7 +10,7 @@ public class AlertManager: MonoBehaviour {
 	private static ArrayList currentActiveAlerts = new ArrayList();
 	public float minAlertTime, maxAlertTime;
 	private bool pickRandomAlert;
-	private bool setOffRandomAlert = true;
+	public bool setOffRandomAlert = true;
 	private bool newAlert = true;
 	private int randomAlertID;
 	private float randomAlertTime, randomAlertStart, annoyanceTimeElapse;
@@ -97,13 +97,18 @@ public class AlertManager: MonoBehaviour {
 	}
 
 	void SetupRandomAlert(){
-		//min and max annoyance move across animation curve
 
+		if(annoyanceTimeElapse > 0.3f){
+			setOffRandomAlert = false;
+			CallAlert(alerts[0]);
+		}
+
+		//min and max annoyance move across animation curve
 		minAnnoyance = (annoyanceCurve.Evaluate(annoyanceTimeElapse - 0.1f));
 		maxAnnoyance = annoyanceCurve.Evaluate(annoyanceTimeElapse);
 
 		superiorOrSubordinate = Random.Range (0, 1);
-		superiorLevel = Random.Range (0f, 3f);
+		superiorLevel = Random.Range (1f, 3f);
 		randomAlertID = Random.Range (0, randomAlerts.Count);
 		randomAnnoyanceLevel = Random.Range (minAnnoyance, maxAnnoyance);
 		float annoyanceMod = Mathf.Abs(0.9f-randomAnnoyanceLevel);
@@ -131,6 +136,7 @@ public class AlertManager: MonoBehaviour {
 			setOffRandomAlert = false;
 			queueRecording.activate = true;
 		}
+	
 	}
 
 	public float getAnnoyanceLevel() {

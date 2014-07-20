@@ -6,6 +6,7 @@ public abstract class Alert: MonoBehaviour {
 	public bool randomAlert;
 	public AudioClip activateClip, resolveClip;
 	private bool destroyObject = false;
+	public AlertManager aManager;
 	
 	public virtual void ActivateAlert(){
 		audio.PlayOneShot (activateClip);
@@ -14,6 +15,7 @@ public abstract class Alert: MonoBehaviour {
 
 	public virtual void ResolveAlert(){
 		audio.PlayOneShot (resolveClip);
+		aManager.setOffRandomAlert = true;
 		Debug.Log ("alert resolved");
 	}
 
