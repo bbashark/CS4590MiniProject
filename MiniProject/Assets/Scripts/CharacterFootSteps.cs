@@ -23,20 +23,20 @@ public class CharacterFootSteps : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (controller.isGrounded){
-			if (controller.velocity.magnitude > 0 && Input.GetKey(KeyCode.LeftShift)) {
-				chMotor.movement.maxForwardSpeed = 10;
-				chMotor.movement.maxSidewaysSpeed = 10;
-			} else {
-				chMotor.movement.maxForwardSpeed = 4;
-				chMotor.movement.maxSidewaysSpeed = 4;
-			}
+//			if (controller.velocity.magnitude > 0 && Input.GetKey(KeyCode.LeftShift)) {
+//				chMotor.movement.maxForwardSpeed = 10;
+//				chMotor.movement.maxSidewaysSpeed = 10;
+//			} else {
+//				chMotor.movement.maxForwardSpeed = 5;
+//				chMotor.movement.maxSidewaysSpeed = 5;
+//			}
 			if (controller.velocity.magnitude > 0) {
-				if (Input.GetKey (KeyCode.LeftShift)){
-					cool = .25F;
-				}
-				else{
-					cool = .5F;
-				}
+//				if (Input.GetKey (KeyCode.LeftShift)){
+//					cool = .25F;
+//				}
+//				else{
+				cool = .5F;
+//				}
 				if (onTile){
 					tileSound();
 				}

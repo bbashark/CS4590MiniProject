@@ -3,6 +3,7 @@ using System.Collections;
 
 public class ReceiveNotice : MonoBehaviour {
 
+	public AudioSource audio;
 	public AudioClip superiorSound;
 	public AudioClip subordinateSound;
 	private AudioClip[][] superiorAnnoyanceSounds;

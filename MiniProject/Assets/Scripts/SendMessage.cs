@@ -9,9 +9,11 @@ public class SendMessage : MonoBehaviour {
 
 	private bool listening = false; // Is Glass now listening for inputs
 	private bool spoke = false;
+	private bool chimed = false;
 
 	private float timer = 0;
-	private float cool = .3F;
+	private float coolStart = .45F;
+	private float coolStop = .3F;
 
 	// Use this for initialization
 	void Start () {
@@ -27,30 +29,35 @@ public class SendMessage : MonoBehaviour {
 		if (timer < 0) {
 			timer = 0;
 		}
+
+
 	}
 
 	private void glassCommSounds() {
-		if (timer == 0){
-			if (!listening && Input.GetKeyDown(KeyCode.G)){
-				listening = true;
-				audio.PlayOneShot(listen);
-				timer = cool;
-			}
-			else if (listening && Input.GetKeyUp(KeyCode.G)){
-				listening = false;
-				if (spoke){
-					audio.PlayOneShot(success);
-					timer = cool;
-				}
-				else{
-					audio.PlayOneShot(cancel);
-					timer = cool;
-				}
+		if (timer == 0 && listening && Input.GetKeyDown (KeyCode.F)) {
+			spoke = true;
+		}
+		if (timer == 0 && chimed && !listening) {
+			if (spoke){
+				audio.PlayOneShot(success);
 				spoke = false;
 			}
+			else{
+				audio.PlayOneShot(cancel);
+			}
+			timer = coolStop;
+			chimed = false;
 		}
-		if (listening && Input.GetKeyDown (KeyCode.F)) {
-			spoke = true;
+		if (Input.GetKeyDown(KeyCode.G)){
+			listening = true;
+			if (timer == 0){
+				audio.PlayOneShot(listen);
+				timer = coolStart;
+				chimed = true;
+			}
+		}
+		if (listening && Input.GetKeyUp (KeyCode.G)) {
+			listening = false;
 		}
 	}
 }
