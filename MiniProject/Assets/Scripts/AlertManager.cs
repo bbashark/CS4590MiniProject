@@ -78,6 +78,10 @@ public class AlertManager: MonoBehaviour {
 		if(Input.GetKeyDown("l")){ // test the camera movement request
 			CallAlert(alerts[0]);
 		}
+		if(Input.GetKeyDown("m")){ // call quiet on set, conclude game
+			setOffRandomAlert = false;
+			queueRecording.activate = true;
+		}
 
 		if(setOffRandomAlert) {
 			if(newAlert){
