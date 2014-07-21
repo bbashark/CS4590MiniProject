@@ -12,6 +12,7 @@ public class AmbientChannel : MonoBehaviour {
 		audio.clip = ambientSound;
 		audio.loop = true;
 		audio.Play();
+		audio.volume = 0.6f;
 	}
 	
 	// Update is called once per frame

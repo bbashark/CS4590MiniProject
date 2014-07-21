@@ -89,7 +89,7 @@ public class AlertManager: MonoBehaviour {
 				incrementedAlert = true;
 				SetupRandomAlert();
 			}
-			if(Time.time - randomAlertStart > randomAlertTime) {
+			if(Time.time - randomAlertStart > randomAlertTime && setOffRandomAlert) {
 				Debug.Log("playing a new random alert");
 				// we're playing a different alert based on if it's coming from
 				// a superior or subordinate sender, as well as shifting pitch 
@@ -116,9 +116,16 @@ public class AlertManager: MonoBehaviour {
 
 	void SetupRandomAlert(){
 
-		if(annoyanceTimeElapse > 0.3f){
+		if(annoyanceTimeElapse == 0.3f){
 			setOffRandomAlert = false;
 			StartCoroutine(CallLocationAfterAlert());
+		}
+		
+		//when at the end of the curve, queue the quiet on set script
+		if (annoyanceTimeElapse > 1f) {
+			//Debug.LogWarning("quiet on set running");
+			setOffRandomAlert = false;
+			queueRecording.activate = true;
 		}
 
 		//min and max annoyance move across animation curve
@@ -148,13 +155,6 @@ public class AlertManager: MonoBehaviour {
 		randomAlertStart = Time.time;
 		//Debug.Log (randomAnnoyanceLevel);
 		//Debug.Log ("new alert in " + randomAlertTime);
-
-		//when at the end of the curve, queue the quiet on set script
-		if (annoyanceTimeElapse > 1f) {
-			//Debug.LogWarning("quiet on set running");
-			setOffRandomAlert = false;
-			queueRecording.activate = true;
-		}
 	
 	}
 
