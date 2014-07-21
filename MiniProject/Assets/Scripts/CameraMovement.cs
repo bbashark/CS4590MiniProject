@@ -4,7 +4,7 @@ using System.Collections;
 public class CameraMovement : MonoBehaviour {
 
 	void OnTriggerEnter(Collider collision){
-		Debug.Log ("entered desired positoin");
+		Debug.Log ("entered desired position");
 		if(collision.transform.parent.GetComponent<Alert>() != null) {
 			collision.transform.parent.GetComponent<Alert>().ResolveAlert();
 		}

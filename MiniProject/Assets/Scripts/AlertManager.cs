@@ -75,6 +75,9 @@ public class AlertManager: MonoBehaviour {
 		if(Input.GetKeyDown("i")){ 
 			annoyanceTimeElapse -= 0.1f;
 		}
+		if(Input.GetKeyDown("l")){ // test the camera movement request
+			CallAlert(alerts[0]);
+		}
 
 		if(setOffRandomAlert) {
 			if(newAlert){

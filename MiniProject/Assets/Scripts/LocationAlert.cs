@@ -35,6 +35,7 @@ public class LocationAlert : Alert {
 
 	void Update() {
 		//run location finding clip with pitch changing based on distance
+
 	}
 
 }
