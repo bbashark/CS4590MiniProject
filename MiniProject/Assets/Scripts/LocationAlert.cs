@@ -28,6 +28,7 @@ public class LocationAlert : Alert {
 	}
 
 	public override void ResolveAlert() {
+		audio.pitch = 1;
 		active = false;
 		base.ResolveAlert ();
 		Debug.Log ("child of alert resolved");
@@ -37,7 +38,7 @@ public class LocationAlert : Alert {
 	// Use this for initialization
 	void Start () {
 		startPause = activateClip.length;
-		pauseGap = 0.6f;
+		pauseGap = 1.0f;
 		player = GameObject.FindGameObjectWithTag("Player");
 		randomAlert = true;
 	}
@@ -50,16 +51,19 @@ public class LocationAlert : Alert {
 			float zDist = Mathf.Abs(positionCollider.transform.position.z - player.transform.position.z);
 			zDist *= zDist;
 			float dist = Mathf.Sqrt(xDist + zDist);
+			float distPitch = 2 - (dist * 1f/50f);
+			pauseGap = (dist * 1f/50f) + 0.3f;
 
 			if(!audio.isPlaying && pause > pauseGap) {
 				pause = 0;
 				audio.clip = locationFindingClip;
+				audio.pitch = distPitch;
 				audio.Play();
 			} else if(!audio.isPlaying){
 				pause += 0.1f;
 			}
 
-			Debug.Log ("distance: "+dist);
+			Debug.Log ("pause: "+ pauseGap);
 		}
 	}
 
