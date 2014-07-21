@@ -10,7 +10,7 @@ public class AlertManager: MonoBehaviour {
 	private static ArrayList currentActiveAlerts = new ArrayList();
 	public float minAlertTime, maxAlertTime;
 	private bool pickRandomAlert;
-	public bool setOffRandomAlert = true;
+	public bool setOffRandomAlert = false;
 	private bool newAlert = true;
 	private int randomAlertID;
 	private float randomAlertTime, randomAlertStart, annoyanceTimeElapse;
