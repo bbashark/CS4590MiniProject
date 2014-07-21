@@ -10,13 +10,13 @@ public abstract class Alert: MonoBehaviour {
 	
 	public virtual void ActivateAlert(){
 		audio.PlayOneShot (activateClip);
-		Debug.Log ("play one shot");
+		//Debug.Log ("play one shot");
 	}
 
 	public virtual void ResolveAlert(){
 		audio.PlayOneShot (resolveClip);
 		aManager.setOffRandomAlert = true;
-		Debug.Log ("alert resolved");
+		//Debug.Log ("alert resolved");
 	}
 
 }

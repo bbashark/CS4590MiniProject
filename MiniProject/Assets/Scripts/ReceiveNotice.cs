@@ -35,7 +35,7 @@ public class ReceiveNotice : MonoBehaviour {
 
 	private void playSound() {
 		audio.pitch = rankMod;
-		Debug.Log (audio.pitch);
+//		Debug.Log (audio.pitch);
 		if (superior) {
 			StartCoroutine(AlertPlay(superiorSound, superiorAnnoyanceSounds));
 		}

@@ -13,7 +13,7 @@ public class LocationAlert : Alert {
 	public override void ActivateAlert() {
 		startPauseTime = Time.time;
 		active = true;
-		Debug.Log ("also do new activate stuff");
+		//Debug.Log ("also do new activate stuff");
 		base.ActivateAlert ();
 		//replace with raycast from player's click to geo, record vector 3
 		desiredLocation = new Vector3 (0f, 1f, -247f);
@@ -31,7 +31,7 @@ public class LocationAlert : Alert {
 		audio.pitch = 1;
 		active = false;
 		base.ResolveAlert ();
-		Debug.Log ("child of alert resolved");
+		//Debug.Log ("child of alert resolved");
 		GameObject.Destroy (positionCollider);
 	}
 
@@ -63,7 +63,7 @@ public class LocationAlert : Alert {
 				pause += 0.1f;
 			}
 
-			Debug.Log ("pause: "+ pauseGap);
+			//Debug.Log ("pause: "+ pauseGap);
 		}
 	}
 

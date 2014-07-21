@@ -83,14 +83,14 @@ public class AlertManager: MonoBehaviour {
 			queueRecording.activate = true;
 		}
 
+		//set up and call random alerts
 		if(setOffRandomAlert) {
 			if(newAlert){
 				incrementedAlert = true;
 				SetupRandomAlert();
 			}
 			if(Time.time - randomAlertStart > randomAlertTime) {
-				//Debug.Log("notice with annoyance level " + randomAnnoyanceLevel);
-
+				Debug.Log("playing a new random alert");
 				// we're playing a different alert based on if it's coming from
 				// a superior or subordinate sender, as well as shifting pitch 
 				// based on their specific ranking in those categories
