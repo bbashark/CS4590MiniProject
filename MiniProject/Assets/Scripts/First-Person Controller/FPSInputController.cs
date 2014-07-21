@@ -59,9 +59,11 @@ public class FPSInputController : MonoBehaviour
 				Debug.Log("grabbed camera");
 				if(parented) {
 					collider.transform.parent = transform.parent.parent;
+					collider.transform.position = new Vector3(collider.transform.position.x, collider.transform.position.y - 1.0f, collider.transform.position.z);
 					parented = false;
 				} else {
 					collider.transform.parent = transform;
+					collider.transform.position = new Vector3(collider.transform.position.x, collider.transform.position.y + 1.0f, collider.transform.position.z);
 					parented = true;
 				}
 			}

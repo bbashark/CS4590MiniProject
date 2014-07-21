@@ -118,7 +118,7 @@ public class AlertManager: MonoBehaviour {
 
 		if(annoyanceTimeElapse > 0.3f){
 			setOffRandomAlert = false;
-			CallAlert(alerts[0]);
+			StartCoroutine(CallLocationAfterAlert());
 		}
 
 		//min and max annoyance move across animation curve
@@ -160,6 +160,11 @@ public class AlertManager: MonoBehaviour {
 
 	public float getAnnoyanceLevel() {
 		return randomAnnoyanceLevel;
+	}
+
+	IEnumerator CallLocationAfterAlert(){
+		yield return new WaitForSeconds (sendNotice.superiorSound.length + 5f);
+		CallAlert(alerts[0]);
 	}
 
 }
