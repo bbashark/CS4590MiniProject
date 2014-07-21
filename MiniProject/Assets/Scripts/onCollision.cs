@@ -34,8 +34,10 @@ public class onCollision : MonoBehaviour {
 
 	public void Play() {
 		if (timer == 0) {
-			audio.PlayOneShot (sounds [Random.Range (0, sounds.Length)]);
-			timer = cool;
+			if(GetComponent<AudioSource>() != null) {
+				audio.PlayOneShot (sounds [Random.Range (0, sounds.Length)]);
+				timer = cool;
+			}
 		}
 	}
 }
