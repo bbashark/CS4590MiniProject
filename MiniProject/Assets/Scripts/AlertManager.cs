@@ -71,9 +71,11 @@ public class AlertManager: MonoBehaviour {
 		}
 		if(Input.GetKeyDown("o")){ // progress forward and backward through annoyance animation curve
 			annoyanceTimeElapse += 0.1f;
+			if(annoyanceTimeElapse > 1.0f) annoyanceTimeElapse = 1.0f;
 		}
 		if(Input.GetKeyDown("i")){ 
 			annoyanceTimeElapse -= 0.1f;
+			if (annoyanceTimeElapse < 0f) annoyanceTimeElapse = 0f;
 		}
 		if(Input.GetKeyDown("l")){ // test the camera movement request
 			CallAlert(alerts[0]);
