@@ -21,10 +21,6 @@ public class AlertManager: MonoBehaviour {
 	public AnimationCurve annoyanceCurve;
 	private float lastCurveIncrement, betweenCurveIncrement;
 	private bool incrementedAlert = false;
-	public AudioClip beaconRecord, beaconSend, beaconCancell;
-	private bool beaconRecording = false;
-	public Camera mainCam;
-	private GameObject player;
 
 	public ReceiveNotice sendNotice;
 	public QuietOnSet queueRecording;
@@ -55,7 +51,6 @@ public class AlertManager: MonoBehaviour {
 	//---------------------------------------------------------
 	//---------------------------------------------------------
 	void Start(){
-		player = GameObject.FindGameObjectWithTag ("Player");
 		lastCurveIncrement = Time.time;
 		betweenCurveIncrement = 10.0f;
 		annoyanceTimeElapse = 0.0f;
@@ -86,46 +81,6 @@ public class AlertManager: MonoBehaviour {
 		if(Input.GetKeyDown("m")){ // call quiet on set, conclude game
 			setOffRandomAlert = false;
 			queueRecording.activate = true;
-		}
-
-		// allow the user to send beacon location messages of their own
-		if(Input.GetKeyDown("b")) {
-			if(!beaconRecording) {
-				setOffRandomAlert = false;
-				audio.clip = beaconRecord;
-				audio.Play ();
-			} else {
-				audio.clip = beaconSend;
-				audio.Play();
-				setOffRandomAlert = true;
-			}
-			beaconRecording = !beaconRecording;
-		}
-		if(Input.GetKeyDown("v")) {
-			if(beaconRecording) {
-				setOffRandomAlert = true;
-				audio.clip = beaconCancell;
-				audio.Play ();
-				beaconRecording = false;
-			}
-		}
-		//draw location beam
-		// referenced: http://answers.unity3d.com/questions/331558/screentoworldpoint-not-working.html
-		if(beaconRecording) {
-			Vector3 mousePos = Input.mousePosition;
-			mousePos.z = 10;
-			Ray positionRay = mainCam.ScreenPointToRay(Input.mousePosition);
-			Vector3 playerModPos = mainCam.transform.position;
-			//playerModPos.y = 1.6f;
-			Debug.DrawRay(playerModPos, mainCam.ScreenToWorldPoint(mousePos) - playerModPos, Color.red);
-			Debug.Log("moust ray " + mousePos);
-
-			/*Ray positionRay = mainCam.ScreenPointToRay(Input.mousePosition);
-
-			RaycastHit hit;
-			if(Physics.Raycast(positionRay, hit, 100)) {
-				Debug.DrawLine(player.transform.position, 
-			}*/
 		}
 
 		//set up and call random alerts
