@@ -20,7 +20,7 @@ public class AlertManager: MonoBehaviour {
 	private int superiorOrSubordinate; 
 	public AnimationCurve annoyanceCurve;
 	private float lastCurveIncrement, betweenCurveIncrement;
-	private bool incrementedAlert = false;
+	private bool incrementedAlert = true;
 
 	public ReceiveNotice sendNotice;
 	public QuietOnSet queueRecording;
