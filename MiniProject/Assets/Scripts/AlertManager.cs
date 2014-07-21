@@ -65,17 +65,6 @@ public class AlertManager: MonoBehaviour {
 	}
 
 	void Update(){
-		//debugging and presentation keys
-		if(Input.GetKeyDown("p")) { //stop and start alerts
-			setOffRandomAlert = !setOffRandomAlert;
-		}
-		if(Input.GetKeyDown("o")){ //add or subtract progress in annoyance curve
-			annoyanceTimeElapse += 0.1f;
-		}
-		if(Input.GetKeyDown("i")){
-			annoyanceTimeElapse -= 0.1f;
-		}
-
 		if(setOffRandomAlert) {
 			if(newAlert){
 				incrementedAlert = true;
