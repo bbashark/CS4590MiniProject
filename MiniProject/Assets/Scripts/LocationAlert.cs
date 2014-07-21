@@ -3,7 +3,7 @@ using System.Collections;
 
 public class LocationAlert : Alert {
 
-	public AudioClip locationFindingClip;
+	public AudioClip locationFindingClip, moveCamVerbalClip;
 	private Vector3 desiredLocation;
 	private GameObject positionCollider;
 	private GameObject player;
@@ -15,6 +15,7 @@ public class LocationAlert : Alert {
 		active = true;
 		//Debug.Log ("also do new activate stuff");
 		base.ActivateAlert ();
+		StartCoroutine ("PlayVoiceMessage");
 		//replace with raycast from player's click to geo, record vector 3
 		desiredLocation = new Vector3 (0f, 1f, -247f);
 
@@ -37,7 +38,7 @@ public class LocationAlert : Alert {
 
 	// Use this for initialization
 	void Start () {
-		startPause = activateClip.length;
+		startPause = activateClip.length + moveCamVerbalClip.length;
 		pauseGap = 1.0f;
 		player = GameObject.FindGameObjectWithTag("Player");
 		randomAlert = true;
@@ -65,6 +66,12 @@ public class LocationAlert : Alert {
 
 			//Debug.Log ("pause: "+ pauseGap);
 		}
+	}
+
+	IEnumerator PlayVoiceMessage() {
+		yield return new WaitForSeconds(activateClip.length);
+		audio.clip = moveCamVerbalClip;
+		audio.Play ();
 	}
 
 }
