@@ -34,7 +34,6 @@ public class ReceiveNotice : MonoBehaviour {
 	}
 
 	private void playSound() {
-		audio.pitch = rankMod;
 //		Debug.Log (audio.pitch);
 		if (superior) {
 			StartCoroutine(AlertPlay(superiorSound, superiorAnnoyanceSounds));
@@ -48,14 +47,16 @@ public class ReceiveNotice : MonoBehaviour {
 	IEnumerator AlertPlay(AudioClip alert, AudioClip[][] annoyanceClips) {
 		audio.PlayOneShot (alert);
 		yield return new WaitForSeconds (alert.length);
+		audio.pitch = rankMod;
+		audio.PlayOneShot (alert);
+		yield return new WaitForSeconds (alert.length);
 		if (annoyanceLevel > annoyanceClips.Length) {
-						annoyanceLevel = annoyanceClips.Length;
+			annoyanceLevel = annoyanceClips.Length;
 		}
-		AudioClip clip = 
 		audio.clip = annoyanceClips [annoyanceLevel][Random.Range(0, annoyanceClips[annoyanceLevel].Length)];
 		audio.pitch = 1;
 		audio.volume = 1;
 		audio.Play ();
-		yield return new WaitForSeconds( clip.length );
+		yield return new WaitForSeconds( audio.clip.length );
 	}
 }
