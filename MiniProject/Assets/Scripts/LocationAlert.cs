@@ -23,6 +23,7 @@ public class LocationAlert : Alert {
 		positionCollider.transform.position = desiredLocation;
 		positionCollider.transform.parent = this.gameObject.transform;
 		positionCollider.AddComponent<BoxCollider> ();
+		positionCollider.AddComponent<AudioSource> ();
 		positionCollider.GetComponent<BoxCollider> ().isTrigger = true;
 
 
@@ -57,9 +58,9 @@ public class LocationAlert : Alert {
 
 			if(!audio.isPlaying && pause > pauseGap) {
 				pause = 0;
-				audio.clip = locationFindingClip;
-				audio.pitch = distPitch;
-				audio.Play();
+				positionCollider.audio.clip = locationFindingClip;
+				positionCollider.audio.pitch = distPitch;
+				positionCollider.audio.Play();
 			} else if(!audio.isPlaying){
 				pause += 0.1f;
 			}

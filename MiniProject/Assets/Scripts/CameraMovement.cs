@@ -3,6 +3,8 @@ using System.Collections;
 
 public class CameraMovement : MonoBehaviour {
 
+	public Collider nonTriggercollider;
+
 	void OnTriggerEnter(Collider collision){
 		Debug.Log ("entered desired position");
 		if(collision.transform.parent.GetComponent<Alert>() != null) {
@@ -11,6 +13,7 @@ public class CameraMovement : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision collision){
-		//Debug.Log ("character controller collided with me");
+
 	}
+
 }

@@ -65,6 +65,7 @@ public class FPSInputController : MonoBehaviour
 					collider.transform.parent = transform;
 					collider.transform.position = new Vector3(collider.transform.position.x, collider.transform.position.y + 1.0f, collider.transform.position.z);
 					parented = true;
+					collider.collider.isTrigger = true;
 				}
 			}
 		}
