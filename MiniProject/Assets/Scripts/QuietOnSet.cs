@@ -30,7 +30,7 @@ public class QuietOnSet : MonoBehaviour {
 			foreach(AudioSource i in objectsWithSound) {
 				StartCoroutine(FadeAudio(i));
 			}
-			//activate = false;
+			activate = false;
 			rec = true;
 			startTime = Time.time;
 		}
@@ -47,6 +47,7 @@ public class QuietOnSet : MonoBehaviour {
 
 	IEnumerator FadeAudio(AudioSource i){
 		yield return new WaitForSeconds (superiorSound.length);
+		yield return new WaitForSeconds (superiorSound.length);
 		yield return new WaitForSeconds(quietVoiceClip.length);
 		if(i.audio.volume > 0) {
 			i.audio.volume -= 0.1f;
@@ -55,6 +56,8 @@ public class QuietOnSet : MonoBehaviour {
 	}
 
 	IEnumerator PlayFullAlert() {
+		yield return new WaitForSeconds (superiorSound.length);
+		audio.PlayOneShot (superiorSound);
 		yield return new WaitForSeconds (superiorSound.length);
 		audio.clip = quietVoiceClip;
 		audio.Play ();
